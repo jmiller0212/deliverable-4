@@ -34,15 +34,15 @@ public class Cell extends JButton {
 		String text = getText();
 		return (text.equals("X"));
 	}
-
+	// _maxSize
 	public String toString() {
-		String toReturn = new String("");
+//		String toReturn = new String("");
 		String currentState = getText();
-		for (int j = 0; j < _maxSize; j++) {
-			toReturn += currentState;
-		}
-		if (toReturn.substring(0, 1).equals("X")) {
-			return toReturn.substring(0, 1);
+//		for (int j = 0; j < _maxSize; j++) {
+//			toReturn += currentState;
+//		}
+		if (currentState.substring(0, 1).equals("X")) {
+			return currentState.substring(0, 1);
 		} else {
 			return ".";
 		}
