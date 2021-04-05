@@ -141,7 +141,7 @@ public class MainPanel extends JPanel {
 		_backupCells = new Cell[_size][_size];
 		for (int j = 0; j < _size; j++) {
 			for (int k = 0; k < _size; k++) {
-//				_backupCells[j][k] = new Cell();
+				_backupCells[j][k] = new Cell();
 				_backupCells[j][k].setAlive(_cells[j][k].getAlive());
 			}
 		}
@@ -230,10 +230,10 @@ public class MainPanel extends JPanel {
 	public void runContinuous() {
 		_running = true;
 		while (_running) {
-			try {
-				Thread.sleep(20);
-			} catch (InterruptedException iex) {
-			}
+//			try {
+//				Thread.sleep(20);
+//			} catch (InterruptedException iex) {
+//			}
 			backup();
 			calculateNextIteration();
 		}
