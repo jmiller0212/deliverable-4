@@ -6,7 +6,7 @@ public class Cell extends JButton {
 
 	private boolean _beenAlive = false;
 
-	private int _maxSize = 10000;
+//	private int _maxSize = 10000;
 
 	public Cell() {
 		super(" ");
@@ -34,7 +34,7 @@ public class Cell extends JButton {
 		String text = getText();
 		return (text.equals("X"));
 	}
-	// _maxSize
+	// _maxSize?
 	public String toString() {
 //		String toReturn = new String("");
 		String currentState = getText();

@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class GameOfLifePinningTest {
@@ -54,9 +55,13 @@ public class GameOfLifePinningTest {
 		blinker.add("..X..");
 		blinker.add(".....");
 		mp.load(blinker);
+		System.out.println("loaded blinker");
+		System.out.println(mp.toString());
 	}
+	
+	@After
+	public void tearDown() { }
 
-	/* TODO: Write the three pinning unit tests for the three optimized methods */
 	@Test
 	public void testIterateCell() {
 		assertTrue(mp.iterateCell(2, 1));
@@ -68,20 +73,13 @@ public class GameOfLifePinningTest {
 	
 	@Test
 	public void testCalculateNextIteration() {
-		// double for loop
-		// assertTrue for (2,1), (2,2), and (2,3)
-		// assertFalse for everything else
-//		for(int i = 0; i < mp.getCellsSize(); i++) {
-//			for(int j = 0; j < mp.getCellsSize(); j++) {
-//				if(i == 2 && (j == 1 || j == 2 || j == 3)) {
-//					assertTrue(mp.iterateCell(i, j));
-//				}
-//				else {
-//					assertFalse(mp.iterateCell(i, j));
-//				}
-//			}
-//		}
-		System.out.println("hi");
 		mp.calculateNextIteration();
+		assertEquals(".....\n.....\n.XXX.\n.....\n.....\n", mp.toString());
+	}
+	
+	@Test
+	public void testCellToString() {
+		Cell c = new Cell(true);
+		assertEquals("X", c.toString());
 	}
 }

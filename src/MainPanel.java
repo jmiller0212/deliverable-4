@@ -12,9 +12,9 @@ public class MainPanel extends JPanel {
 
 	private int _size = 0;
 
-	private int _maxCount = 50000000;
+//	private int _maxCount = 50000000;
 
-	public int _r = 1000;
+//	public int _r = 1000;
 
 	private boolean _running = false;
 
@@ -76,9 +76,7 @@ public class MainPanel extends JPanel {
 		if (_cells[x][downY].getAlive()) {
 			numNeighbors++;
 		}
-
 		return numNeighbors;
-
 	}
 
 	public boolean iterateCell(int x, int y) {
@@ -230,10 +228,10 @@ public class MainPanel extends JPanel {
 	public void runContinuous() {
 		_running = true;
 		while (_running) {
-//			try {
-//				Thread.sleep(20);
-//			} catch (InterruptedException iex) {
-//			}
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException iex) {
+			}
 			backup();
 			calculateNextIteration();
 		}
@@ -299,11 +297,6 @@ public class MainPanel extends JPanel {
 
 	/**
 	 * Load in a previously saved Game of Life configuration.
-	 * 0: "     "
-	 * 1: "  X  "
-	 * 2: "  X  "
-	 * 3: "  X  "
-	 * 4: "     "
 	 */
 
 	public void load(ArrayList<String> lines) {
