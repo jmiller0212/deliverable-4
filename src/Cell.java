@@ -6,8 +6,6 @@ public class Cell extends JButton {
 
 	private boolean _beenAlive = false;
 
-//	private int _maxSize = 10000;
-
 	public Cell() {
 		super(" ");
 		setFont(new Font("Courier", Font.PLAIN, 12));
@@ -34,13 +32,9 @@ public class Cell extends JButton {
 		String text = getText();
 		return (text.equals("X"));
 	}
-	// _maxSize?
+	
 	public String toString() {
-//		String toReturn = new String("");
 		String currentState = getText();
-//		for (int j = 0; j < _maxSize; j++) {
-//			toReturn += currentState;
-//		}
 		if (currentState.substring(0, 1).equals("X")) {
 			return currentState.substring(0, 1);
 		} else {

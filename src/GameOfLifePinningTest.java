@@ -1,11 +1,11 @@
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class GameOfLifePinningTest {
@@ -35,28 +35,38 @@ public class GameOfLifePinningTest {
 	 * this deliverable).
 	 */
 
-	/* TODO: Declare all variables required for the test fixture. */
-	MainPanel mp = new MainPanel(5);
+	MainPanel mp;
+	Cell[][] cells;
 
 	@Before
 	public void setUp() {
 		/*
-		 * TODO: initialize the text fixture. For the initial pattern, use the "blinker"
+		 * Initialize the text fixture. For the initial pattern, use the "blinker"
 		 * pattern shown in:
 		 * https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns
 		 * The actual pattern GIF is at:
 		 * https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#/media/File:Game_of_life_blinker.gif
 		 * Start from the vertical bar on a 5X5 matrix as shown in the GIF.
 		 */
-		ArrayList<String> blinker = new ArrayList<String>(5);
-		blinker.add(".....");
-		blinker.add("..X..");
-		blinker.add("..X..");
-		blinker.add("..X..");
-		blinker.add(".....");
-		mp.load(blinker);
-		System.out.println("loaded blinker");
-		System.out.println(mp.toString());
+		cells = new Cell[5][5];
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+				Cell c = mock(Cell.class);
+				if(j == 2 && (i == 1 || i == 2 || i == 3)) {
+					when(c.getAlive()).thenReturn(true);
+					when(c.toString()).thenReturn("X");
+				} else {
+					when(c.getAlive()).thenReturn(false);
+					when(c.toString()).thenReturn(".");
+				}
+				doNothing().when(c).setAlive(true);
+				doNothing().when(c).setAlive(false);
+				cells[i][j] = c;
+			}
+		}
+		mp = new MainPanel(5);
+		mp.clear();
+		mp.setCells(cells);
 	}
 	
 	@After
@@ -74,7 +84,11 @@ public class GameOfLifePinningTest {
 	@Test
 	public void testCalculateNextIteration() {
 		mp.calculateNextIteration();
-		assertEquals(".....\n.....\n.XXX.\n.....\n.....\n", mp.toString());
+		verify(cells[2][1], times(1)).setAlive(true);
+		verify(cells[2][2], times(1)).setAlive(true);
+		verify(cells[2][3], times(1)).setAlive(true);
+		verify(cells[1][2], times(1)).setAlive(false);
+		verify(cells[3][2], times(1)).setAlive(false);
 	}
 	
 	@Test

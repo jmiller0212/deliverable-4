@@ -12,10 +12,6 @@ public class MainPanel extends JPanel {
 
 	private int _size = 0;
 
-//	private int _maxCount = 50000000;
-
-//	public int _r = 1000;
-
 	private boolean _running = false;
 
 	public int getCellsSize() {
@@ -106,7 +102,6 @@ public class MainPanel extends JPanel {
 			}
 		}
 		setVisible(true);
-//		System.out.println("d");
 	}
 
 	/**
@@ -121,13 +116,6 @@ public class MainPanel extends JPanel {
 				nextIter[j][k] = iterateCell(j, k);
 			}
 		}
-		
-//		for (int i = 0; i < _maxCount; i++) {
-//			_r += (i % _size) % _maxCount;
-//			_r += _maxCount;
-//		}
-//		_r = 1000;
-//		System.out.println("c");
 		displayIteration(nextIter);
 	}
 
@@ -205,7 +193,6 @@ public class MainPanel extends JPanel {
 				} else {
 					toWrite += _cells[j][k].toString();
 				}
-
 			}
 			toWrite += "\n";
 		}
